@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Changing Climate</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      .logo {
+        width: 20%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .logo img {
+        width: 33%;
+        border: 3px solid white;
+        border-radius: 200px;
+        margin: 5px;
+      }
+
+      .navbar {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: sticky;
+        top: 0;
+        cursor: pointer;
+        z-index: 1;
+      }
+
+      .nav-list {
+        width: 80%;
+        display: flex;
+        align-items: center;
+      }
+
+      .nav-list li {
+        list-style: none;
+        padding: 26px 28px;
+      }
+
+      .nav-list li a {
+        text-decoration: none;
+        color: white;
+        font-size: 20px;
+      }
+
+      .nav-list li a:hover {
+        color: rgb(149, 71, 71);
+      }
+
+      .rightNav {
+        width: 30%;
+        text-align: right;
+        padding: 0 23px;
+      }
+
+      #search {
+        padding: 5px;
+        font-size: 17px;
+        border: 2px solid grey;
+        border-radius: 14px;
+      }
+
+      .background {
+        background-image: url("data:image/jpeg;base64,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");
+        background-size: cover;
+        width: 100%;
+        height: auto;
+      }
+
+      .img-fluid {
+        width: 100%;
+        height: auto;
+      }
+
+      .background-nav {
+        background-color: #6f7a50;
+        background-size: cover;
+        background-blend-mode: darken;
+      }
+
+      .section1 {
+        height: 100vh;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      .box-main {
+        height: 80%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        max-width: 50%;
+        margin: auto;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      }
+
+      .firsthalf {
+        width: 40%;
+        height: 50%;
+        right: 50%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        position: absolute;
+        top: 200px;
+        left: 30%;
+      }
+
+      .secondhalf {
+        width: 30%;
+      }
+
+      .secondhalf img {
+        height: 220px;
+        width: 220px;
+        border: 4px solid white;
+        border-radius: 15px;
+        display: block;
+        margin: auto;
+      }
+
+      .text-big {
+        font-size: 41px;
+        font-weight: bolder;
+        text-align: center;
+        justify-content: space-between;
+      }
+
+      .text-big1 {
+        font-size: 35px;
+        font-weight: bolder;
+        text-align: center;
+        background-size: cover;
+      }
+
+      .text-small {
+        font-size: 18px;
+        text-align: center;
+        font-weight: bold;
+      }
+
+      .text-small1 {
+        font-size: 18px;
+        font-weight: bold;
+      }
+
+      .btn {
+        margin-left: 98px;
+        padding: 8px 20px;
+        margin: 8px 3px;
+        border: 2px solid white;
+        border-radius: 8px;
+        background: none;
+        color: white;
+        font-weight: bolder;
+        justify-content: center;
+        cursor: pointer;
+      }
+
+      .btn-dark:hover,
+      .btn-sm:hover,
+      .buttons button:hover {
+        outline-color: transparent;
+        outline-style: solid;
+        box-shadow: 0 0 0 4px #071b6d;
+        transition: 0.7s;
+      }
+
+      .btn-sm {
+        padding: 6px 10px;
+        vertical-align: middle;
+        cursor: pointer;
+      }
+
+      .btn-dark {
+        color: black;
+        border: 2px solid grey;
+        border-radius: 9px;
+        cursor: pointer;
+      }
+
+      .section {
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+        max-width: 80%;
+        margin: auto;
+        font-family: "Lato", sans-serif;
+        padding: 10px;
+      }
+
+      .section-left {
+        flex-direction: row-reverse;
+      }
+      .paras {
+        padding: 0 65px;
+      }
+
+      .sectionsubtag {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      }
+
+      .sectionTag {
+        padding: 16px 0;
+      }
+
+      .thumbnail img {
+        width: 250px;
+        border: 2px solid black;
+        border-radius: 8px;
+      }
+
+      .buttons {
+        margin: 0 68px;
+        max-width: 270px;
+      }
+
+      .contact {
+        height: 800px;
+        background-color: #ddd9d9;
+      }
+
+      .text-center {
+        text-align: center;
+        padding-top: 20px;
+        font-family: "Lato", sans-serif;
+        font-size: 35px;
+      }
+
+      .text-footer {
+        text-align: center;
+        padding: 20px;
+        font-family: "Lato", sans-serif;
+        display: flex;
+        justify-content: center;
+        color: white;
+      }
+
+      .form {
+        max-width: 62%;
+        margin: 25px auto;
+      }
+
+      .form-input {
+        margin: 14px 0;
+        padding: 5px 13px;
+        width: 100%;
+        font-size: 19px;
+        border: 2px solid grey;
+        border-radius: 6px;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      }
+
+      .burger {
+        display: none;
+        position: absolute;
+        cursor: pointer;
+        right: 5%;
+        top: 15px;
+      }
+
+      .line {
+        width: 33px;
+        background-color: white;
+        height: 4px;
+        margin: 5px 3px;
+      }
+
+      @media only screen and (max-width: 1100px) {
+        .nav-list {
+          flex-direction: column;
+        }
+        .navbar {
+          flex-direction: column;
+          transition: all 0.3s ease-out;
+          height: 478px;
+        }
+        .rightNav {
+          text-align: center;
+        }
+        .box-main {
+          flex-direction: column-reverse;
+          max-width: 100%;
+        }
+        #search {
+          width: 100%;
+        }
+        .burger {
+          display: block;
+        }
+        .h-nav-resp {
+          height: 69px;
+        }
+        .v-class-resp {
+          opacity: 0;
+        }
+
+        .logo-img {
+          width: 50%;
+          border: 2px solid white;
+        }
+        .section {
+          flex-direction: column-reverse;
+        }
+        .section1 {
+          height: 50vh;
+          margin-bottom: 35px;
+        }
+        .paras {
+          padding: 15px 0;
+        }
+        .text-big1 {
+          font-size: 29px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="navbar background-nav h-nav-resp">
+      <ul class="nav-list background-nav v-class-resp">
+        <div class="logo">
+          <a
+            href="http://127.0.0.1:5500/index.html#contact"
+            aria-label="iEducate logo"
+            class="logo"
+          ></a>
+          <a href=""
+            ><img class="logo-img" src="img/laptop.jpg" alt="logo"
+          /></a>
+        </div>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#contact">Contact Us</a></li>
+      </ul>
+      <div class="rightNav v-class-resp">
+        <input
+          type="text"
+          name="search"
+          id="search"
+          placeholder="Search a Keyword"
+        />
+        <button class="btn btn-sm">Search</button>
+      </div>
+      <div class="burger">
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+      </div>
+    </nav>
+
+    <section class="background section1 img-fluid" id="home"></section>
+    <div class="firsthalf">
+      <p class="text-big1">
+        “By polluting the oceans, not mitigating CO2 emissions and destroying
+        our biodiversity, we are killing our planet. Let us face it, there is no
+        planet B.”
+      </p>
+    </div>
+    <hr />
+    <section class="section" id="services">
+      <div class="paras">
+        <p class="text-big sectionTag">How climate changes</p>
+        <p class="sectionsubTag text-small1">
+          Climate change refers to long-term shifts in temperatures and weather
+          patterns. These shifts may be natural, such as through variations in
+          the solar cycle. But since the 1800s, human activities have been the
+          main driver of climate change, primarily due to burning fossil fuels
+          like coal, oil and gas. Burning fossil fuels generates greenhouse gas
+          emissions that act like a blanket wrapped around the Earth, trapping
+          the sun's heat and raising temperatures. Examples of greenhouse gas
+          emissions that are causing climate change include carbon dioxide and
+          methane. These come from using gasoline for driving a car or coal for
+          heating a building, for example. Clearing land and forests can also
+          release carbon dioxide. Landfills for garbage are a major source of
+          methane emissions. Energy, industry, transport, buildings, agriculture
+          and land use are among the main emitters.
+        </p>
+      </div>
+      <div class="thumbnail">
+        <img
+          src="https://www.un.org/sites/un2.un.org/files/2021/08/feeling-the-heat.jpg"
+          height="200px"
+          width="200px"
+          alt="loding"
+          class="imgFluid"
+        />
+      </div>
+    </section>
+    <hr />
+    <section class="section section-left" id="about">
+      <div class="paras">
+        <p class="text-big sectionTag">Growing Global Warming</p>
+        <p class="sectionsubTag text-small1">
+          Global warming is the long-term warming of the planet;s overall
+          temperature. Though this warming trend has been going on for a long
+          time, its pace has significantly increased in the last hundred years
+          due to the burning of fossil fuels. As the human population has
+          increased, so has the volume of fossil fuels burned. Fossil fuels
+          include coal, oil, and natural gas, and burning them causes what is
+          known as the “greenhouse effect” in Earth;s atmosphere. The greenhouse
+          effect is when the Sun;s rays penetrate the atmosphere, but when that
+          heat is reflected off the surface cannot escape back into space. Gases
+          produced by the burning of fossil fuels prevent the heat from leaving
+          the atmosphere. These greenhouse gasses are carbon dioxide,
+          chlorofluorocarbons, water vapor, methane, and nitrous oxide. The
+          excess heat in the atmosphere has caused the average global
+          temperature to rise overtime, otherwise known as global warming.
+        </p>
+      </div>
+      <div class="thumbnail">
+        <img
+          src="https://source.unsplash.com/1600x900/?globel-warming"
+          height="200px"
+          width="200px"
+          alt="loding"
+          class="imgFluid"
+        />
+      </div>
+    </section>
+    <hr />
+    <section class="section">
+      <div class="paras">
+        <p class="text-big sectionTag">How to save our Earth</p>
+        <p class="sectionsubTag text-small1">
+          Our planet faces the interconnected crises of rapid climate change and
+          biodiversity loss. We have years, not decades, to address these
+          existential threats. In published research from The Nature Conservancy
+          and 12 peer organizations, science points us to a better path for
+          building a more sustainable, more hopeful future for the Earth. A
+          future in which catastrophic climate change is kept at bay while we
+          still power our developing world. A future in which we can feed 10
+          billion people worldwide and provide cleaner, more abundant drinking
+          water while also protecting life-giving lands, lakes and rivers. A
+          future in which nature's wild heart still beats strong through healthy
+          wildlife and magnificent landscapes while our cities are strengthened
+          by harmony with nature.
+        </p>
+      </div>
+      <div class="thumbnail">
+        <img
+          src="https://source.unsplash.com/1600x900/?water"
+          height="200px"
+          width="200px"
+          alt="loding"
+          class="imgFluid"
+        />
+      </div>
+    </section>
+
+    <hr />
+
+    <section class="contact" id="contact">
+      <h2 class="text-center">Join US</h2>
+      <div class="form">
+        <input
+          class="form-input"
+          type="text"
+          name="name"
+          id="name"
+          placeholder="Enter Your Name"
+        />
+        <input
+          class="form-input"
+          type="number"
+          name="phone"
+          id="phone"
+          placeholder="Enter Your Phone"
+        />
+        <input
+          class="form-input"
+          type="email"
+          name="email"
+          id="email"
+          placeholder="Enter Your Email"
+        />
+        <textarea
+          class="form-input"
+          name="text"
+          id="text"
+          cols="30"
+          rows="10"
+          placeholder="Ellaborate Your Concern"
+        ></textarea>
+        <buuton class="btn btn-dark">Sumbit</buuton>
+      </div>
+    </section>
+
+    <footer class="background-nav">
+      <p class="text-footer">
+        Copyright &copy; 2027 - www.iEducate.com - All rights reserved
+      </p>
+    </footer>
+    <script>
+      burger = document.querySelector(".burger");
+      navbar = document.querySelector(".navbar");
+      navlist = document.querySelector(".nav-list");
+      rightNav = document.querySelector(".rightNav");
+      burger.addEventListener("click", () => {
+        rightNav.classList.toggle("v-class-resp");
+        navlist.classList.toggle("v-class-resp");
+        navbar.classList.toggle("h-nav-resp");
+      });
+    </script>
+  </body>
+</html>
